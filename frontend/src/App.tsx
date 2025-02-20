@@ -1,22 +1,31 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import { useEffect, useRef, useState } from 'react'
+import axios from "axios";
+import './App.css';
 
-function App() {
-  const [word, setWord] = useState(null);
+interface Solution {
+  id: number;
+  word: string;
+}
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5173/word")
-  //     .then(res => res.json())
-  //     .then(json => {
-  //        console.log(json);
-  //     });
-  // }, []);
+export default function App() {
+  const [solution, setSolution] = useState<Solution | null>(null);
+  const fetched = useRef(null);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/solutions")
+      .then((res) => {
+        const solutions = res.data;
+        if (solutions.length > 0) {
+          const idx = Math.floor(Math.random() * solutions.length);
+          setSolution(solutions[idx]);
+        }
+      })
+      .catch(err => console.error(err))
+  }, [setSolution]);
   
   return (
     <>
-      <div></div>
+      {solution && <div>{solution.word}</div>}
     </>
   )
 }
-
-export default App

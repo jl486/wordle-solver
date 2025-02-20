@@ -1,12 +1,12 @@
 import express from "express";
-import { Word } from "../models/wordModel.js";
+import { Solution } from "../models/solutionModel.js";
 
 export const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const words = await Word.find({});
-    res.json(words);
+    const solution = await Solution.find({});
+    res.json(solution);
   } catch (err) {
     res.status(500).send(err);
   }

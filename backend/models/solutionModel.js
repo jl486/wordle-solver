@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const wordSchema = new mongoose.Schema(
+const solutionSchema = new mongoose.Schema(
   {
     id: {
       type: Number,
@@ -16,4 +16,4 @@ const wordSchema = new mongoose.Schema(
   }
 );
 
-export const Word = mongoose.model("Word", wordSchema);
+export const Solution = mongoose.model("Solution", solutionSchema);
