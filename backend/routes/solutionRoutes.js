@@ -1,13 +1,7 @@
-import express from "express";
-import { Solution } from "../models/solutionModel.js";
+import express from "express"
+import { solutionListGet, solutionWordGet } from "../controllers/solutionController.js";
 
-export const router = express.Router();
+export const solutionRouter = express.Router();
 
-router.get("/", async (req, res) => {
-  try {
-    const solution = await Solution.find({});
-    res.json(solution);
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
+solutionRouter.get("/solutions", solutionListGet);
+solutionRouter.get("/solutions/:id", solutionWordGet);

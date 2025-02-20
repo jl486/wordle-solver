@@ -15,9 +15,10 @@ export default function App() {
     axios.get("http://localhost:8000/solutions")
       .then((res) => {
         const solutions = res.data;
+        setSolution(solutions);
         if (solutions.length > 0) {
-          const idx = Math.floor(Math.random() * solutions.length);
-          setSolution(solutions[idx]);
+          const id = Math.floor(Math.random() * solutions.length);
+          setSolution(solutions[id]);
         }
       })
       .catch(err => console.error(err))
