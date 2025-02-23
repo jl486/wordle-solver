@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import { useCallback } from "react";
 import { useGame, useGameDispatch } from "../contexts/GameContext";
+import { useWindowEvent } from "../hooks/useWindowEvent";
 
 export default function Game() {
   const game = useGame();
   const dispatch = useGameDispatch();
 
-  const handleKeyUp = ({ key }: KeyboardEvent) => {
-    console.log(key);
+  useWindowEvent("keydown", useCallback(({ key }: KeyboardEvent) => {
     if (key === "Backspace") {
       dispatch({
         type: "DELETE_LETTER"
@@ -20,12 +20,7 @@ export default function Game() {
         });
       }
     }
-  };
-
-  useEffect(() => {
-    window.addEventListener("keyup", handleKeyUp);
-    return () => window.removeEventListener("keyup", handleKeyUp);
-  }, [handleKeyUp]);
+  }, []))
 
   return (
     <div>current guess: {game.currentGuess}</div>
