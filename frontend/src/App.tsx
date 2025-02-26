@@ -21,8 +21,7 @@ export default function App() {
 
   return (
     <GameProvider>
-      <Game />
-      {solution && <div>{solution.word}</div>}
+      <Game solution={solution} />
     </GameProvider>
   );
 }

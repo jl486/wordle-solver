@@ -2,6 +2,8 @@ import { createContext, Dispatch, useContext, useReducer } from "react";
 
 interface GameState {
   currentGuess: string;
+  history: string[];
+  tries: number;
 }
 
 interface Action {
@@ -10,7 +12,9 @@ interface Action {
 }
 
 const initialState: GameState = {
-  currentGuess: ""
+  currentGuess: "",
+  history: [],
+  tries: 0
 };
 
 const GameContext = createContext<GameState>(initialState);
@@ -38,7 +42,7 @@ export function useGameDispatch() {
 
 function gameReducer(state: GameState, action: Action) {
   switch (action.type) {
-    case "ADD_LETTER":
+    case "ADD_LETTER": {
       if (state.currentGuess.length < 5) {
         return {
           ...state,
@@ -46,12 +50,38 @@ function gameReducer(state: GameState, action: Action) {
         };
       }
       return state;
-    case "DELETE_LETTER":
+    }
+    case "DELETE_LETTER": {
       return {
         ...state,
         currentGuess: state.currentGuess.slice(0, -1),
       };
-    default:
+    }
+    case "ADD_GUESS": {
+      if (state.currentGuess.length !== 5) {
+        console.log("Guess must be 5 characters long");
+        return state;
+      }
+
+      if (state.history.includes(state.currentGuess)) {
+        console.log("You already tried that word");
+        return state;
+      }
+
+      if (state.tries >= 6) {
+        console.log("No more guesses");
+        return state;
+      }
+
+      return {
+        ...state,
+        history: [...state.history, state.currentGuess],
+        currentGuess: "",
+        tries: state.tries + 1
+      }
+    }
+    default: {
       throw Error("Unknown action: " + action.type);
+    }
   }
 }

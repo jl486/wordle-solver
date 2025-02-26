@@ -1,11 +1,21 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 export function useWindowEvent<K extends keyof WindowEventMap>(
-  event: K, 
+  event: K,
   callback: (e: WindowEventMap[K]) => void
 ) {
-  useEffect(() => {
-    window.addEventListener(event, callback);
-    return () => window.removeEventListener(event, callback);
+  const handleEvent = useCallback((e: WindowEventMap[K]) => {
+    if (e instanceof KeyboardEvent && event === "keydown") {
+      if (!e.repeat) {
+        callback(e);
+      }
+    } else {
+      callback(e);
+    }
   }, [event, callback]);
+
+  useEffect(() => {
+    window.addEventListener(event, handleEvent);
+    return () => window.removeEventListener(event, handleEvent);
+  }, [event, handleEvent]);
 }
