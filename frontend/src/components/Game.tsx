@@ -1,14 +1,24 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useGame, useGameDispatch } from "../contexts/GameContext";
 import { useWindowEvent } from "../hooks/useWindowEvent";
 
 interface GameProps {
-  solution: Solution | undefined;
+  solution: string | undefined;
 }
 
 export default function Game({ solution }: GameProps) {
   const game = useGame();
   const dispatch = useGameDispatch();
+
+  // Initialize solution
+  useEffect(() => {
+    if (solution) {
+      dispatch({
+        type: "SET_SOLUTION",
+        solution: solution
+      });
+    }
+  }, [solution, dispatch]);
 
   useWindowEvent("keydown", useCallback(({ key }: KeyboardEvent) => {
     if (/^[A-Za-z]$/.test(key) && game.currentGuess.length < 5) {
@@ -33,8 +43,8 @@ export default function Game({ solution }: GameProps) {
 
   return (
     <>
-      <div>current guess: {game.currentGuess}</div>
-      <div>solution: {solution ? solution.word : "Loading..."}</div>
+      <div>current guess: {game.currentGuess.toUpperCase()}</div>
+      <div>solution: {game.solution ? game.solution : "Loading..."}</div>
     </>
   );
 }

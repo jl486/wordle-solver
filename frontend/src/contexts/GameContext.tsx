@@ -1,20 +1,31 @@
 import { createContext, Dispatch, useContext, useReducer } from "react";
+import { formatGuess } from "../utils/formatGuess";
+
+interface FormattedGuessItem {
+  key: string;
+  color: string
+}
 
 interface GameState {
   currentGuess: string;
   history: string[];
+  formattedHistory: FormattedGuessItem[][],
   tries: number;
+  solution: string | undefined;
 }
 
 interface Action {
   type: string;
   payload?: string;
+  solution?: string;
 }
 
 const initialState: GameState = {
   currentGuess: "",
   history: [],
-  tries: 0
+  formattedHistory: [],
+  tries: 0,
+  solution: undefined
 };
 
 const GameContext = createContext<GameState>(initialState);
@@ -58,6 +69,15 @@ function gameReducer(state: GameState, action: Action) {
       };
     }
     case "ADD_GUESS": {
+      if (!state.solution) {
+        return state;
+      }
+      
+      if (state.tries >= 6) {
+        console.log("No more guesses");
+        return state;
+      }
+
       if (state.currentGuess.length !== 5) {
         console.log("Guess must be 5 characters long");
         return state;
@@ -68,16 +88,21 @@ function gameReducer(state: GameState, action: Action) {
         return state;
       }
 
-      if (state.tries >= 6) {
-        console.log("No more guesses");
-        return state;
-      }
-
       return {
         ...state,
         history: [...state.history, state.currentGuess],
+        formattedHistory: [
+          ...state.formattedHistory,
+          formatGuess(state.currentGuess, state.solution)
+        ],
         currentGuess: "",
         tries: state.tries + 1
+      }
+    }
+    case "SET_SOLUTION": {
+      return {
+        ...state,
+        solution: action.solution
       }
     }
     default: {
