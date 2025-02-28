@@ -1,3 +1,5 @@
+import { GameState } from "../types";
+
 export function formatGuess(guess: string, solution: string) {
   const formatted = [...guess].map((ch) => ({
     key: ch,
@@ -23,4 +25,12 @@ export function formatGuess(guess: string, solution: string) {
   });
 
   return formatted;
+}
+
+export function validateGuess(state: GameState) {
+  if (state.tries >= 6) return "No more guesses";
+  if (state.currentGuess.length !== 5) return "Guess must be 5 letters long";
+  if (state.history.includes(state.currentGuess)) return "You already tried that word";
+
+  return null;
 }

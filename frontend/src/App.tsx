@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { GameProvider } from "./contexts/GameContext";
 import Game from "./components/Game";
+import { Solution } from "./types";
 import "./App.css";
 
 export default function App() {

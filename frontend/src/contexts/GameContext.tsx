@@ -1,31 +1,14 @@
 import { createContext, Dispatch, useContext, useReducer } from "react";
-import { formatGuess } from "../utils/formatGuess";
-
-interface FormattedGuessItem {
-  key: string;
-  color: string
-}
-
-interface GameState {
-  currentGuess: string;
-  history: string[];
-  formattedHistory: FormattedGuessItem[][],
-  tries: number;
-  solution: string | undefined;
-}
-
-interface Action {
-  type: string;
-  payload?: string;
-  solution?: string;
-}
+import { formatGuess, validateGuess } from "../utils/guessUtils";
+import { GameState, Action } from "../types";
 
 const initialState: GameState = {
   currentGuess: "",
   history: [],
   formattedHistory: [],
   tries: 0,
-  solution: undefined
+  solution: undefined,
+  isSolved: false
 };
 
 const GameContext = createContext<GameState>(initialState);
@@ -69,22 +52,13 @@ function gameReducer(state: GameState, action: Action) {
       };
     }
     case "ADD_GUESS": {
+      const err = validateGuess(state);
+      if (err) {
+        console.log(err);
+        return state;
+      }
+
       if (!state.solution) {
-        return state;
-      }
-      
-      if (state.tries >= 6) {
-        console.log("No more guesses");
-        return state;
-      }
-
-      if (state.currentGuess.length !== 5) {
-        console.log("Guess must be 5 characters long");
-        return state;
-      }
-
-      if (state.history.includes(state.currentGuess)) {
-        console.log("You already tried that word");
         return state;
       }
 
@@ -96,7 +70,8 @@ function gameReducer(state: GameState, action: Action) {
           formatGuess(state.currentGuess, state.solution)
         ],
         currentGuess: "",
-        tries: state.tries + 1
+        tries: state.tries + 1,
+        isSolved: state.currentGuess === state.solution
       }
     }
     case "SET_SOLUTION": {
