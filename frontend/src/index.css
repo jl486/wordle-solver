@@ -4,8 +4,14 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #000000;
+
+  --text-white: #dcdcdc;
+  --text-black: #000;
+  --bg-white: #fff;
+  --bg-black: #121212;
+
+  --gray-light: #d8d8d8;
+  --gray-dark: #3c3c3c;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,4 +25,37 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
+  color: var(--text-white);
+  background-color: var(--bg-black);
+}
+
+.row {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.row > div {
+  display: block;
+  width: 60px;
+  height: 60px;
+  border: 2px solid var(--gray-dark);
+  margin: 4px;
+  text-align: center;
+  line-height: 60px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 2.5em
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    color: var(--text-black);
+    background-color: var(--bg-white);
+  }
+
+  .row > div {
+    border: 2px solid var(--gray-light);
+  }
 }

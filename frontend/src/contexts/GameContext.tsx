@@ -5,7 +5,7 @@ import { GameState, Action } from "../types";
 const initialState: GameState = {
   currentGuess: "",
   history: [],
-  formattedHistory: [],
+  formattedHistory: [...Array(6)],
   tries: 0,
   solution: undefined,
   isSolved: false

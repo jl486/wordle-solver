@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { useGame, useGameDispatch } from "../contexts/GameContext";
 import { useWindowEvent } from "../hooks/useWindowEvent";
+import Grid from "./Grid";
 
 interface GameProps {
   solution: string | undefined;
@@ -43,8 +44,13 @@ export default function Game({ solution }: GameProps) {
 
   return (
     <>
-      <div>current guess: {game.currentGuess.toUpperCase()}</div>
+      <div>current guess: {game.currentGuess}</div>
       <div>solution: {game.solution ? game.solution : "Loading..."}</div>
+      <Grid
+        currentGuess={game.currentGuess}
+        formattedHistory={game.formattedHistory}
+        tries={game.tries}
+      />
     </>
   );
 }
