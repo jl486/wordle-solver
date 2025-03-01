@@ -4,8 +4,7 @@ import { GameState, Action } from "../types";
 
 const initialState: GameState = {
   currentGuess: "",
-  history: [],
-  formattedHistory: [...Array(6)],
+  history: [...Array(6)],
   tries: 0,
   solution: undefined,
   isSolved: false
@@ -62,12 +61,14 @@ function gameReducer(state: GameState, action: Action) {
         return state;
       }
 
+      console.log(state.history);
+
       return {
         ...state,
-        history: [...state.history, state.currentGuess],
-        formattedHistory: [
-          ...state.formattedHistory,
-          formatGuess(state.currentGuess, state.solution)
+        history: [
+          ...state.history.slice(0, state.tries),
+          formatGuess(state.currentGuess, state.solution),
+          ...state.history.slice(state.tries + 1)
         ],
         currentGuess: "",
         tries: state.tries + 1,

@@ -5,18 +5,31 @@
 
   color-scheme: light dark;
 
-  --text-white: #dcdcdc;
-  --text-black: #000;
-  --bg-white: #fff;
-  --bg-black: #121212;
-
-  --gray-light: #d8d8d8;
+  --text-dark: #dcdcdc;
+  --bg-dark: #121212;
   --gray-dark: #3c3c3c;
+  --green-dark: #528c4d;
+  --yellow-dark: #b49d3c;
+
+  --text-light: #000;
+  --bg-light: #fff;
+  --gray-light: #d8d8d8;
+  --green-light: #6ca965;
+  --yellow-light: #c8b653;
+
+  --gray: #787878;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("../public/assets/fonts/HelveticaNeue-Bold.woff") format("truetype");
+  font-weight: bold;
+  font-style: bold;
 }
 
 body {
@@ -26,8 +39,9 @@ body {
   min-width: 320px;
   min-height: 100vh;
 
-  color: var(--text-white);
-  background-color: var(--bg-black);
+  color: var(--text-dark);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-dark);
 }
 
 .row {
@@ -37,7 +51,9 @@ body {
 }
 
 .row > div {
-  display: block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   width: 60px;
   height: 60px;
   border: 2px solid var(--gray-dark);
@@ -45,17 +61,46 @@ body {
   text-align: center;
   line-height: 60px;
   text-transform: uppercase;
-  font-weight: bold;
-  font-size: 2.5em
+  font-size: 2.3rem;
+}
+
+.row > div.green {
+  background-color: var(--green-dark);
+  border-color: var(--green-dark);
+}
+
+.row > div.yellow {
+  background-color: var(--yellow-dark);
+  border-color: var(--yellow-dark);
+}
+
+.row > div.gray {
+  background-color: var(--gray-dark);
+  border-color: var(--gray-dark);
 }
 
 @media (prefers-color-scheme: light) {
   body {
-    color: var(--text-black);
-    background-color: var(--bg-white);
+    color: var(--text-light);
+    background-color: var(--bg-light);
   }
 
   .row > div {
     border: 2px solid var(--gray-light);
+  }
+
+  .row > div.green {
+    background-color: var(--green-light);
+    border-color: var(--green-light);
+  }
+
+  .row > div.yellow {
+    background-color: var(--yellow-light);
+    border-color: var(--yellow-light);
+  }
+
+  .row > div.gray {
+    background-color: var(--gray);
+    border-color: var(--gray);
   }
 }

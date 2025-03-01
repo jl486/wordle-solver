@@ -1,18 +1,19 @@
-import { FormattedGuessItem } from "../types";
+import { GuessItem } from "../types";
 import Row from "./Row";
 
 interface GridProps {
   currentGuess: string;
-  formattedHistory: FormattedGuessItem[][];
+  history: GuessItem[][];
   tries: number;
 }
 
-export default function Grid({ formattedHistory }: GridProps) {
+export default function Grid({ history }: GridProps) {
   return (
     <>
-      {formattedHistory.map((_, i) => (
+      {history.map((guess, i) => (
         <Row 
           key={i}
+          guess={guess}
         />
       ))}
     </>

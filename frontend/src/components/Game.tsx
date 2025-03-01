@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useGame, useGameDispatch } from "../contexts/GameContext";
 import { useWindowEvent } from "../hooks/useWindowEvent";
 import Grid from "./Grid";
@@ -11,6 +11,8 @@ export default function Game({ solution }: GameProps) {
   const game = useGame();
   const dispatch = useGameDispatch();
 
+  const currentGuessLengthRef = useRef(game.currentGuess.length);
+
   // Initialize solution
   useEffect(() => {
     if (solution) {
@@ -22,7 +24,7 @@ export default function Game({ solution }: GameProps) {
   }, [solution, dispatch]);
 
   useWindowEvent("keydown", useCallback(({ key }: KeyboardEvent) => {
-    if (/^[A-Za-z]$/.test(key) && game.currentGuess.length < 5) {
+    if (/^[A-Za-z]$/.test(key) && currentGuessLengthRef.current < 5) {
       dispatch({
         type: "ADD_LETTER",
         payload: key
@@ -38,9 +40,9 @@ export default function Game({ solution }: GameProps) {
     if (key === "Enter") {
       dispatch({
         type: "ADD_GUESS"
-      })
+      });
     }
-  }, [game.currentGuess.length, dispatch]))
+  }, [dispatch]));
 
   return (
     <>
@@ -48,7 +50,7 @@ export default function Game({ solution }: GameProps) {
       <div>solution: {game.solution ? game.solution : "Loading..."}</div>
       <Grid
         currentGuess={game.currentGuess}
-        formattedHistory={game.formattedHistory}
+        history={game.history}
         tries={game.tries}
       />
     </>

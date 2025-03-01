@@ -3,7 +3,7 @@ import { GameState } from "../types";
 export function formatGuess(guess: string, solution: string) {
   const formatted = [...guess].map((ch) => ({
     key: ch,
-    color: "grey"
+    color: "gray"
   }));
 
   const solutionLetters = [...solution];
@@ -28,9 +28,23 @@ export function formatGuess(guess: string, solution: string) {
 }
 
 export function validateGuess(state: GameState) {
-  if (state.tries >= 6) return "No more guesses";
-  if (state.currentGuess.length !== 5) return "Guess must be 5 letters long";
-  if (state.history.includes(state.currentGuess)) return "You already tried that word";
+  if (state.tries >= 6) {
+    return "No more guesses";
+  }
+
+  if (state.currentGuess.length !== 5) {
+    return "Guess must be 5 letters long";
+  }
+
+  const inHistory = state.history.some((guess) => (
+    guess &&
+    guess.length === state.currentGuess.length &&
+    guess.every((item, i) => item.key === state.currentGuess[i])
+  ));  
+
+  if (inHistory) {
+    return "You already tried that word";
+  }
 
   return null;
 }

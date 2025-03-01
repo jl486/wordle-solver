@@ -1,12 +1,11 @@
-export interface FormattedGuessItem {
+export interface GuessItem {
   key: string;
   color: string
 }
 
 export interface GameState {
   currentGuess: string;
-  history: string[];
-  formattedHistory: FormattedGuessItem[][],
+  history: GuessItem[][];
   tries: number;
   solution: string | undefined;
   isSolved: boolean;
