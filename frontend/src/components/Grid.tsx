@@ -1,9 +1,9 @@
-import { GuessItem } from "../types";
+import { Letter } from "../types";
 import Row from "./Row";
 
 interface GridProps {
   currentGuess: string | undefined;
-  history: GuessItem[][];
+  history: Letter[][];
   tries: number;
 }
 
@@ -24,7 +24,6 @@ export default function Grid({ currentGuess, history, tries }: GridProps) {
         return (
           <Row 
             key={i}
-            currentGuess={undefined}
             guess={guess}
           />
         );

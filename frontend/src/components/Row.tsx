@@ -1,21 +1,24 @@
-import { GuessItem } from "../types";
+import { Letter } from "../types";
+import { RowItem } from "./RowItem";
 
 interface RowProps {
-  guess: GuessItem[] | undefined;
-  currentGuess: string | undefined;
+  guess?: Letter[];
+  currentGuess?: string;
 }
+
+type VariantType = "default" | "yellow" | "green" | null | undefined;
 
 export default function Row({ guess, currentGuess }: RowProps) {
   if (guess) {
     return (
-      <div className="row past">
+      <div className="text-center flex justify-center">
         {guess.map((item, i) => (
-          <div
+          <RowItem
             key={i}
-            className={item.color}
+            variant={item.color as VariantType}
           >
             {item.key}
-          </div>
+          </RowItem>
         ))}
       </div>
     );
@@ -24,26 +27,32 @@ export default function Row({ guess, currentGuess }: RowProps) {
   if (currentGuess) {
     let letters = [...currentGuess];
     return (
-      <div className="row current">
+      <div className="text-center flex justify-center">
         {letters.map((item, i) => (
-          <div
+          <RowItem
             key={i}
-            className="filled"
+            variant="current"
           >
             {item}
-          </div>
+          </RowItem>
         ))}
         {[...Array(5 - letters.length)].map((_, i) => (
-          <div key={i} />
+          <RowItem 
+            key={i}
+            variant="default"
+          />
         ))}
       </div>
     );
   }
 
   return (
-    <div className="row">
+    <div className="text-center flex justify-center">
       {[...Array(5)].map((_, i) => (
-        <div key={i} />
+        <RowItem 
+          key={i}
+          variant="default"
+        />
       ))}
     </div>
   );

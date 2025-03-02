@@ -1,11 +1,11 @@
-export interface GuessItem {
+export interface Letter {
   key: string;
-  color: string
+  color: string;
 }
 
 export interface GameState {
   currentGuess: string;
-  history: GuessItem[][];
+  history: Letter[][];
   tries: number;
   solution: string | undefined;
   isSolved: boolean;
