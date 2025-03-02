@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
 
-  --text-dark: #dcdcdc;
+  --text-dark: #ffffff;
   --bg-dark: #121212;
   --gray-dark: #3c3c3c;
   --green-dark: #528c4d;
@@ -87,6 +87,7 @@ body {
 
   .row > div {
     border: 2px solid var(--gray-light);
+    color: var(--text-dark);
   }
 
   .row > div.green {

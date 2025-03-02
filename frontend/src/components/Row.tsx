@@ -1,10 +1,11 @@
 import { GuessItem } from "../types";
 
 interface RowProps {
-  guess: GuessItem[];
+  guess: GuessItem[] | undefined;
+  currentGuess: string | undefined;
 }
 
-export default function Row({ guess }: RowProps) {
+export default function Row({ guess, currentGuess }: RowProps) {
   if (guess) {
     return (
       <div className="row past">
@@ -15,6 +16,25 @@ export default function Row({ guess }: RowProps) {
           >
             {item.key}
           </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (currentGuess) {
+    let letters = [...currentGuess];
+    return (
+      <div className="row current">
+        {letters.map((item, i) => (
+          <div
+            key={i}
+            className="filled"
+          >
+            {item}
+          </div>
+        ))}
+        {[...Array(5 - letters.length)].map((_, i) => (
+          <div key={i} />
         ))}
       </div>
     );

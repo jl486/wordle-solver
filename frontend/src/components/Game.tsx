@@ -46,7 +46,6 @@ export default function Game({ solution }: GameProps) {
 
   return (
     <>
-      <div>current guess: {game.currentGuess}</div>
       <div>solution: {game.solution ? game.solution : "Loading..."}</div>
       <Grid
         currentGuess={game.currentGuess}
