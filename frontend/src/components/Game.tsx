@@ -45,13 +45,13 @@ export default function Game({ solution }: GameProps) {
   }, [dispatch]));
 
   return (
-    <>
+    <div className="w-full max-w-96 mx-auto my-0 flex flex-col">
       <div>solution: {game.solution ? game.solution : "Loading..."}</div>
       <Grid
         currentGuess={game.currentGuess}
         history={game.history}
         tries={game.tries}
       />
-    </>
+    </div>
   );
 }

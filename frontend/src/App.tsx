@@ -22,6 +22,15 @@ export default function App() {
 
   return (
     <GameProvider>
+      <header
+        className="w-full flex flex-row justify-between items-center
+          h-14 bg-background-white dark:bg-background-dark
+          border-b-[1px] border-border-light dark:border-border-dark
+          tracking-wider font-bold text-3xl
+        "
+      >
+        WORDLE
+      </header>
       <Game solution={solution?.word} />
     </GameProvider>
   );

@@ -9,7 +9,7 @@ interface GridProps {
 
 export default function Grid({ currentGuess, history, tries }: GridProps) {
   return (
-    <>
+    <div className="flex justify-center items-center flex-col flex-grow">
       {history.map((guess, i) => {
         if (tries === i) {
           return (
@@ -28,6 +28,6 @@ export default function Grid({ currentGuess, history, tries }: GridProps) {
           />
         );
       })}
-    </>
+    </div>
   );
 }

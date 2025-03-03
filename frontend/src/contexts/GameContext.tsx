@@ -73,13 +73,13 @@ function gameReducer(state: GameState, action: Action) {
         currentGuess: "",
         tries: state.tries + 1,
         isSolved: state.currentGuess === state.solution
-      }
+      };
     }
     case "SET_SOLUTION": {
       return {
         ...state,
         solution: action.solution
-      }
+      };
     }
     default: {
       throw Error("Unknown action: " + action.type);

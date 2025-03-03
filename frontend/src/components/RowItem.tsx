@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 const rowItemVariants = cva(
-  "inline-flex items-center justify-center w-14 h-14 border-2 border-solid border-gray-light m-[2.5px] text-center uppercase text-4xl",
+  "inline-flex items-center justify-center w-14 h-14 border-2 border-solid border-gray-light m-[2.5px] font-bold text-center uppercase text-3xl",
   {
     variants: {
       variant: {

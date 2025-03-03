@@ -6,8 +6,6 @@ interface RowProps {
   currentGuess?: string;
 }
 
-type VariantType = "default" | "yellow" | "green" | null | undefined;
-
 export default function Row({ guess, currentGuess }: RowProps) {
   if (guess) {
     return (
@@ -15,7 +13,7 @@ export default function Row({ guess, currentGuess }: RowProps) {
         {guess.map((item, i) => (
           <RowItem
             key={i}
-            variant={item.color as VariantType}
+            variant={item.color}
           >
             {item.key}
           </RowItem>

@@ -1,7 +1,7 @@
-import { GameState } from "../types";
+import { GameState, Letter } from "../types";
 
 export function formatGuess(guess: string, solution: string) {
-  const formatted = [...guess].map((ch) => ({
+  const formatted: Letter[] = [...guess].map((ch) => ({
     key: ch,
     color: "gray"
   }));

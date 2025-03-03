@@ -1,6 +1,6 @@
 export interface Letter {
   key: string;
-  color: string;
+  color: "default" | "gray" | "yellow" | "green" | null | undefined;
 }
 
 export interface GameState {
