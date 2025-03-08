@@ -1,1 +1,1 @@
-export * as GuessUtils from "./guessUtils";
+export * as GuessUtils from './guessUtils';

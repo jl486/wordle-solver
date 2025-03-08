@@ -1,9 +1,9 @@
-import { createContext, Dispatch, useContext, useReducer } from "react";
-import { formatGuess, validateGuess } from "../utils/guessUtils";
-import { GameState, Action } from "../types";
+import { createContext, Dispatch, useContext, useReducer } from 'react';
+import { formatGuess, validateGuess } from '../utils/guessUtils';
+import { GameState, Action } from '../types';
 
 const initialState: GameState = {
-  currentGuess: "",
+  currentGuess: '',
   history: [...Array(6)],
   tries: 0,
   solution: undefined,
@@ -35,7 +35,7 @@ export function useGameDispatch() {
 
 function gameReducer(state: GameState, action: Action) {
   switch (action.type) {
-    case "ADD_LETTER": {
+    case 'ADD_LETTER': {
       if (state.currentGuess.length < 5) {
         return {
           ...state,
@@ -44,24 +44,20 @@ function gameReducer(state: GameState, action: Action) {
       }
       return state;
     }
-    case "DELETE_LETTER": {
+    case 'DELETE_LETTER': {
       return {
         ...state,
         currentGuess: state.currentGuess.slice(0, -1),
       };
     }
-    case "ADD_GUESS": {
+    case 'ADD_GUESS': {
       const err = validateGuess(state);
       if (err) {
         console.log(err);
         return state;
       }
 
-      if (!state.solution) {
-        return state;
-      }
-
-      console.log(state.history);
+      if (!state.solution) return state;
 
       return {
         ...state,
@@ -70,19 +66,19 @@ function gameReducer(state: GameState, action: Action) {
           formatGuess(state.currentGuess, state.solution),
           ...state.history.slice(state.tries + 1)
         ],
-        currentGuess: "",
+        currentGuess: '',
         tries: state.tries + 1,
-        isSolved: state.currentGuess === state.solution
+        isSolved: state.currentGuess === state.solution,
       };
     }
-    case "SET_SOLUTION": {
+    case 'SET_SOLUTION': {
       return {
         ...state,
         solution: action.solution
       };
     }
     default: {
-      throw Error("Unknown action: " + action.type);
+      throw Error('Unknown action: ' + action.type);
     }
   }
 }

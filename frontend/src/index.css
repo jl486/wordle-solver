@@ -19,7 +19,7 @@
 @layer base {
   :root {
     color-scheme: light dark;
-  
+
     --white: #fff;
     --gray-1: #d8d8d8;
     --gray-2: #8c8c8c;
@@ -28,13 +28,13 @@
     --gray-5: #3c3c3c;
     --gray-6: #121212;
     --black: #000;
-  
+
     --yellow-1: #c8b653;
     --yellow-2: #b49d3c;
-  
+
     --green-1: #6ca965;
     --green-2: #528c4d;
-  
+
     font-synthesis: none;
     text-rendering: optimizeLegibility;
   }
