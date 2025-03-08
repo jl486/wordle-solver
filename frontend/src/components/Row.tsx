@@ -38,7 +38,7 @@ export default function Row({ guess, currentGuess }: RowProps) {
 
     if (currentGuess) {
       const letters = [...currentGuess].map((item, i) => (
-        <RowItem key={i} variant="current">
+        <RowItem key={i} variant="current" className="animate-bounce">
           {item}
         </RowItem>
       ));

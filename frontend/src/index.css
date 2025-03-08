@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Helvetica Neue";
-  src: url("/assets/fonts/HelveticaNeue.woff2") format("woff2");
+  font-family: 'Helvetica Neue';
+  src: url('/assets/fonts/HelveticaNeue.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Helvetica Neue";
-  src: url("/assets/fonts/HelveticaNeueBold.woff2") format("woff2");
+  font-family: 'Helvetica Neue';
+  src: url('/assets/fonts/HelveticaNeueBold.woff2') format('woff2');
   font-weight: 700;
   font-style: bold;
 }
@@ -43,27 +43,6 @@
 @layer base {
   body {
     @apply font-sans;
-  }
-}
-
-@layer utilities {
-  .animate-flip {
-    animation: flip 0.6s linear forwards;
-  }
-}
-
-@keyframes flip {
-  0% {
-    transform: rotateX(0);
-  }
-  45% {
-    transform: rotateX(90deg);
-  }
-  55% {
-    transform: rotateX(90deg);
-  }
-  100% {
-    transform: rotateX(0deg);
   }
 }
 
