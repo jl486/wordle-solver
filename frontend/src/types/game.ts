@@ -14,7 +14,6 @@ export interface GameState {
 export interface Action {
   type: string;
   payload?: string;
-  solution?: string;
 }
 
 export interface Solution {

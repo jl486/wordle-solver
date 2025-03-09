@@ -34,6 +34,8 @@ export function useGameDispatch() {
 }
 
 function gameReducer(state: GameState, action: Action) {
+  if (state.isSolved) return state;
+
   switch (action.type) {
     case 'ADD_LETTER': {
       if (state.currentGuess.length < 5) {
@@ -42,6 +44,7 @@ function gameReducer(state: GameState, action: Action) {
           currentGuess: state.currentGuess + action.payload
         };
       }
+
       return state;
     }
     case 'DELETE_LETTER': {
@@ -74,7 +77,13 @@ function gameReducer(state: GameState, action: Action) {
     case 'SET_SOLUTION': {
       return {
         ...state,
-        solution: action.solution
+        solution: action.payload
+      };
+    }
+    case 'SOLVED': {
+      return {
+        ...state,
+        isSolved: true
       };
     }
     default: {

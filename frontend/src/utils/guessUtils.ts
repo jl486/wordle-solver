@@ -28,6 +28,10 @@ export function formatGuess(guess: string, solution: string) {
 }
 
 export function validateGuess(state: GameState) {
+  if (state.isSolved) {
+    return 'You won already';
+  }
+  
   if (state.tries >= 6) {
     return 'No more guesses';
   }
