@@ -1,22 +1,67 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/assets/fonts/HelveticaNeue.woff2') format('woff2');
   font-weight: 400;
+  font-style: normal;
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #000000;
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/assets/fonts/HelveticaNeueBold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: bold;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  :root {
+    color-scheme: light dark;
+
+    --white: #fff;
+    --gray-1: #d8d8d8;
+    --gray-2: #8c8c8c;
+    --gray-3: #787878; 
+    --gray-4: #585858;
+    --gray-5: #3c3c3c;
+    --gray-6: #121212;
+    --black: #000;
+
+    --yellow-1: #c8b653;
+    --yellow-2: #b49d3c;
+
+    --green-1: #6ca965;
+    --green-2: #528c4d;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@layer base {
+  body {
+    @apply font-sans;
+  }
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  padding: 0;
   min-width: 320px;
   min-height: 100vh;
+
+  color: var(--black);
+  background-color: var(--white);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: var(--white);
+    background-color: var(--gray-6);
+  }
 }
