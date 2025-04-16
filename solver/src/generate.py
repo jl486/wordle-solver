@@ -1,4 +1,5 @@
 import numpy as np
+from numpy.typing import NDArray
 from itertools import count
 from typing import Any
 
@@ -43,7 +44,11 @@ def generate_full_pattern(
     
     return pattern
 
-def get_pattern_matrix(words1: list[str], words2: list[str], pattern_grid_data: dict[str, Any]) -> np.ndarray:
+def get_pattern_matrix(
+    words1: list[str],
+    words2: list[str],
+    pattern_grid_data: dict[str, Any]
+) -> NDArray[Any]:
     """
     Gets the pattern matrix between two lists of words and 
     """
@@ -76,7 +81,7 @@ def get_possible_words(guess: str, pattern: int, word_list: list[str]) -> list[i
 
 def get_word_buckets(guess: str, solutions: list[str]) -> list[list[str]]:
     buckets = [[] for _ in range(3**5)]
-    hashes: np.ndarray = get_pattern_matrix([guess], solutions).flatten()
+    hashes = get_pattern_matrix([guess], solutions).flatten()
     for i, word in zip(hashes, solutions):
         buckets[i].append(word)
     return buckets

@@ -1,28 +1,40 @@
 import numpy as np
+from numpy.typing import NDArray
 from scipy.stats import entropy
 
 from solver.src.pattern import Pattern
 
-def get_pattern_distributions(allowed: list[str], solutions: list[str], weights: np.ndarray) -> np.ndarray:
-    similarity: np.ndarray = Pattern(allowed, solutions, length=5).generate_matrix()
+def get_pattern_distributions(
+    allowed: list[str],
+    solutions: list[str],
+    weights: NDArray[np.float32]
+) -> NDArray[np.float32]:
+    similarity = Pattern(allowed, solutions, length=5).generate_matrix()
     
-    distributions: np.ndarray = np.zeros((len(allowed), 3**5))
+    distributions = np.zeros((len(allowed), 3**5))
     np.add.at(distributions, (np.arange(len(allowed)), similarity), weights)
 
     return distributions
 
-def entropy_of_distributions(distributions: np.ndarray) -> float:
-    axis: int = len(distributions.shape) - 1
+def entropy_of_distributions(distributions: NDArray[np.float32]) -> float:
+    axis = len(distributions.shape) - 1
     return entropy(distributions, base=2, axis=axis)
 
-def get_entropies(allowed: list[str], solutions: list[str], weights: np.ndarray):
+def get_entropies(
+    allowed: list[str],
+    solutions: list[str],
+    weights: NDArray[np.float32]
+) -> float:
     if weights.sum() == 0:
         return np.zeros(len(allowed))
     
-    distributions: np.ndarray = get_pattern_distributions(allowed, solutions, weights)
+    distributions = get_pattern_distributions(allowed, solutions, weights)
     return entropy_of_distributions(distributions)
 
-def get_bucket_sizes(allowed: list[str], solutions: list[str]) -> np.ndarray:
+def get_bucket_sizes(
+    allowed: list[str],
+    solutions: list[str]
+) -> NDArray[np.float32]:
     weights = np.ones(len(solutions))
     return get_pattern_distributions(allowed, solutions, weights)
 
